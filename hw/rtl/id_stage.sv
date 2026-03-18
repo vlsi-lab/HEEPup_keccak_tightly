@@ -18,7 +18,7 @@ module id_stage
     input clk_i,
     input rst_ni,
 
-    cv32e40px_if_xif.coproc_issue xif_issue_if,
+    if_xif.coproc_issue xif_issue_if,
 
     output keccak_tightly_pkg::in_t rs_values_o,
     output logic [4:0] rd_o,

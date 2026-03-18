@@ -26,7 +26,7 @@ module commit_stage
     input logic done_i,
     input logic continued_i,
     
-    cv32e40px_if_xif.coproc_result xif_result_if
+    if_xif.coproc_result xif_result_if
 
 );
 
