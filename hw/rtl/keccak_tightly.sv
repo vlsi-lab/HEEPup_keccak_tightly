@@ -7,7 +7,7 @@
 //
 /////////////////////////////////////////////////////////////////////////////////
 
-module keccak
+module keccak_tightly
   import cv32e40px_core_v_xif_pkg::*;
   import keccak_tightly_pgk::*;
 (

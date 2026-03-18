@@ -11,13 +11,13 @@ filesets:
 
   rtl:
     files:
-    - hw/rtl/include/keccak_tightly_pgk.sv
+    - hw/rtl/include/keccak_tightly_pkg.sv
     - hw/rtl/id_stage.sv
     - hw/rtl/commit_stage.sv
     - hw/rtl/rol32.v
-    - hw/rtl/keccak.sv
-    - hw/rtl/keccak_top.sv
-    - hw/rtl/keccak_wrapper.sv
+    - hw/rtl/keccak_tightly.sv
+    - hw/rtl/keccak_tightly_top.sv
+    - hw/rtl/keccak_tightly_wrapper.sv
     file_type: systemVerilogSource
 
 targets:

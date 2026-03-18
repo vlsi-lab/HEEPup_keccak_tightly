@@ -8,7 +8,7 @@
 
 
 
-module keccak_top 
+module keccak_tightly_top 
   import cv32e40px_pkg::*;
   import cv32e40px_core_v_xif_pkg::*;
 (
