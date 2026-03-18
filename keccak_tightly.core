@@ -21,7 +21,13 @@ filesets:
     - hw/rtl/keccak_tightly_wrapper.sv
     file_type: systemVerilogSource
 
+  waivers:
+    files:
+    - waivers.vlt
+    file_type: vlt
+
 targets:
   default: &default_target
     filesets:
     - rtl
+    - waivers
