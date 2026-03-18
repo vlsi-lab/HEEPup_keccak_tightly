@@ -12,7 +12,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////
 
 module commit_stage
-  import keccak_tightly_pgk::*;
+  import keccak_tightly_pkg::*;
   (
     input logic clk_i,
     input logic rst_ni,
@@ -21,8 +21,8 @@ module commit_stage
 
     input logic [4:0] rd_i,
     input logic [3:0] id_i,
-    input keccak_tightly_pgk::out_t result_i,
-    input keccak_tightly_pgk::keccak_insn insn_i,
+    input keccak_tightly_pkg::out_t result_i,
+    input keccak_tightly_pkg::keccak_insn insn_i,
     input logic done_i,
     input logic continued_i,
     

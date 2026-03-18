@@ -24,10 +24,10 @@ module keccak_tightly_top
 );
 
 
-keccak_tightly_pgk::in_t rs_values;
-keccak_tightly_pgk::out_t rd_values;
+keccak_tightly_pkg::in_t rs_values;
+keccak_tightly_pkg::out_t rd_values;
 //result_to_commit;
-keccak_tightly_pgk::keccak_insn select_insn;
+keccak_tightly_pkg::keccak_insn select_insn;
 logic [4:0] rd_idex, rd_excom;
 logic [3:0] id_idex, id_excom;
 logic [1:0] select_op;

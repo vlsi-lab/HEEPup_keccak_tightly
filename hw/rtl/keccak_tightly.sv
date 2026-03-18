@@ -9,19 +9,19 @@
 
 module keccak_tightly
   import cv32e40px_core_v_xif_pkg::*;
-  import keccak_tightly_pgk::*;
+  import keccak_tightly_pkg::*;
 (
     input logic clk_i,
     input logic rst_ni,
 
-    input keccak_tightly_pgk::in_t rs_values_i,
-    input keccak_tightly_pgk::keccak_insn insn_i,
+    input keccak_tightly_pkg::in_t rs_values_i,
+    input keccak_tightly_pkg::keccak_insn insn_i,
     input logic result_reg_en_i,
-    output keccak_tightly_pgk::out_t rd_values_o
+    output keccak_tightly_pkg::out_t rd_values_o
 );
 
   //--------always-present signals declarations ----------------------------------------------------------------------------
-  keccak_tightly_pgk::out_t out;
+  keccak_tightly_pkg::out_t out;
   logic [31:0] a1, b1, c1;
 
 
@@ -60,15 +60,15 @@ module keccak_tightly
 
     // Case statement to evaluate selector
     case (insn_i)
-        keccak_tightly_pgk::nada: begin
+        keccak_tightly_pkg::nada: begin
           out.rd1 = '0;
           out.rd2 = '0;
         end
-        keccak_tightly_pgk::rol32_1: begin
+        keccak_tightly_pkg::rol32_1: begin
           out.rd2 = '0;
           out.rd1 = rol32_1_result;
         end
-        keccak_tightly_pgk::rol32_2: begin
+        keccak_tightly_pkg::rol32_2: begin
           out.rd2 = '0;
           out.rd1 = result_reg;
         end

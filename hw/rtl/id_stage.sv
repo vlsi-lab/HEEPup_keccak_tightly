@@ -13,17 +13,17 @@
 
 
 module id_stage
-  import keccak_tightly_pgk::*;
+  import keccak_tightly_pkg::*;
   (
     input clk_i,
     input rst_ni,
 
     cv32e40px_if_xif.coproc_issue xif_issue_if,
 
-    output keccak_tightly_pgk::in_t rs_values_o,
+    output keccak_tightly_pkg::in_t rs_values_o,
     output logic [4:0] rd_o,
     output logic [3:0] id_o,
-    output keccak_tightly_pgk::keccak_insn select_insn_o,
+    output keccak_tightly_pkg::keccak_insn select_insn_o,
 
     output logic save_rd_o,
     output logic done_o,
@@ -33,9 +33,9 @@ module id_stage
     output logic [1:0] select_op_o
 );
 
-  keccak_tightly_pgk::instruction_u instruction;
-  keccak_tightly_pgk::in_t rs_values;
-  keccak_tightly_pgk::keccak_insn select_insn;
+  keccak_tightly_pkg::instruction_u instruction;
+  keccak_tightly_pkg::in_t rs_values;
+  keccak_tightly_pkg::keccak_insn select_insn;
 
   logic [1:0] select_op;
   logic sample_in;
@@ -75,7 +75,7 @@ module id_stage
     if (xif_issue_if.issue_valid == 1'b1) begin
       case (instruction.raw[6:0])
       
-        keccak_tightly_pgk::keccak_R: begin
+        keccak_tightly_pkg::keccak_R: begin
           xif_issue_if.issue_ready = '1;
     
           xif_issue_if.issue_resp.accept = 1'b1;
@@ -104,7 +104,7 @@ module id_stage
           end
         end
 
-        keccak_tightly_pgk::keccak_R4: begin
+        keccak_tightly_pkg::keccak_R4: begin
           xif_issue_if.issue_ready = '1;
     
           xif_issue_if.issue_resp.accept = 1'b1;
@@ -174,11 +174,11 @@ module id_stage
         end else if (select_op== 2'b10) begin
           done       <= '1;
 
-          if (select_insn == keccak_tightly_pgk::rol32_1) begin
+          if (select_insn == keccak_tightly_pkg::rol32_1) begin
             continued     <= '1;
             result_reg_en <= '1;
           end 
-          else if (select_insn == keccak_tightly_pgk::rol32_2) begin
+          else if (select_insn == keccak_tightly_pkg::rol32_2) begin
             continued     <= '0;
             result_reg_en <= '0;
           end else begin
