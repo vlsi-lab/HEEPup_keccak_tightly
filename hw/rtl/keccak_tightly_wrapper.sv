@@ -7,7 +7,7 @@
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-module kronos_wrapper 
+module keccak_wrapper 
   import cv32e40px_pkg::*;
   import cv32e40px_core_v_xif_pkg::*;
 (
@@ -24,7 +24,7 @@ module kronos_wrapper
 );
 
 
-    kronos_top kronos_top_i(
+    keccak_top keccak_top_i(
     .clk_i (clk_i),
     .rst_ni(rst_ni),
 

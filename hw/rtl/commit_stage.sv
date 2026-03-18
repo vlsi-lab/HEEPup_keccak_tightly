@@ -2,17 +2,17 @@
 // Engineer:      Alessandra Dolmeta - alessandra.dolmeta@polito.it                     //
 //                                                                                      //
 // Design Name:    Top level module                                                     //
-// Project Name:   kronos:                                                             //
+// Project Name:   keccak:                                                             //
 //                 Tightly-coupled Accelerator for RISC-V                               //
 // File name:      commit_stage.sv                                                      //
 // Language:       SystemVerilog                                                        //
 //                                                                                      //
-// Description:    kronos commit_stage.                                                //
+// Description:    keccak commit_stage.                                                //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 module commit_stage
-  import kronos_pkg::*;
+  import keccak_tightly_pgk::*;
   (
     input logic clk_i,
     input logic rst_ni,
@@ -21,8 +21,8 @@ module commit_stage
 
     input logic [4:0] rd_i,
     input logic [3:0] id_i,
-    input kronos_pkg::out_t result_i,
-    input kronos_pkg::kronos_insn insn_i,
+    input keccak_tightly_pgk::out_t result_i,
+    input keccak_tightly_pgk::keccak_insn insn_i,
     input logic done_i,
     input logic continued_i,
     

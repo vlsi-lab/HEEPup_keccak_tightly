@@ -2,28 +2,28 @@
 // Engineer:      Alessandra Dolmeta - alessandra.dolmeta@polito.it                     //
 //                                                                                      //
 // Design Name:    Top level module                                                     //
-// Project Name:   kronos:                                                             //
+// Project Name:   keccak:                                                             //
 //                 Tightly-coupled Accelerator for RISC-V with Code-based Algorithms    //
 // File name:      id_stage.sv                                                          //
 // Language:       SystemVerilog                                                        //
 //                                                                                      //
-// Description:    kronos id_stage.                                                    //
+// Description:    keccak id_stage.                                                    //
 //                                                                                      //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
 module id_stage
-  import kronos_pkg::*;
+  import keccak_tightly_pgk::*;
   (
     input clk_i,
     input rst_ni,
 
     cv32e40px_if_xif.coproc_issue xif_issue_if,
 
-    output kronos_pkg::in_t rs_values_o,
+    output keccak_tightly_pgk::in_t rs_values_o,
     output logic [4:0] rd_o,
     output logic [3:0] id_o,
-    output kronos_pkg::kronos_insn select_insn_o,
+    output keccak_tightly_pgk::keccak_insn select_insn_o,
 
     output logic save_rd_o,
     output logic done_o,
@@ -33,9 +33,9 @@ module id_stage
     output logic [1:0] select_op_o
 );
 
-  kronos_pkg::instruction_u instruction;
-  kronos_pkg::in_t rs_values;
-  kronos_pkg::kronos_insn select_insn;
+  keccak_tightly_pgk::instruction_u instruction;
+  keccak_tightly_pgk::in_t rs_values;
+  keccak_tightly_pgk::keccak_insn select_insn;
 
   logic [1:0] select_op;
   logic sample_in;
@@ -75,7 +75,7 @@ module id_stage
     if (xif_issue_if.issue_valid == 1'b1) begin
       case (instruction.raw[6:0])
       
-        kronos_pkg::kronos_R: begin
+        keccak_tightly_pgk::keccak_R: begin
           xif_issue_if.issue_ready = '1;
     
           xif_issue_if.issue_resp.accept = 1'b1;
@@ -88,15 +88,15 @@ module id_stage
           rs_values.rs2_0 = xif_issue_if.issue_req.rs[1];
           rs_values.rs3_0 = xif_issue_if.issue_req.rs[2];
     
-          rd_o <= instruction.as_kronos_R.rd;
+          rd_o <= instruction.as_keccak_R.rd;
           id_o <= xif_issue_if.issue_req.id;
     
-          if (instruction.as_kronos_R.funct7 == FUNCT7_1) begin
-            if (instruction.as_kronos_R.funct3 == OP_R_R0) begin
+          if (instruction.as_keccak_R.funct7 == FUNCT7_1) begin
+            if (instruction.as_keccak_R.funct3 == OP_R_R0) begin
               select_insn = montg_k;
-            end else if (instruction.as_kronos_R.funct3 == OP_R_R1) begin
+            end else if (instruction.as_keccak_R.funct3 == OP_R_R1) begin
               select_insn = montg_d;
-            end else if (instruction.as_kronos_R.funct3 == OP_R_R2) begin
+            end else if (instruction.as_keccak_R.funct3 == OP_R_R2) begin
               select_insn = barrett;
             end else begin
               select_insn = nada;
@@ -104,7 +104,7 @@ module id_stage
           end
         end
 
-        kronos_pkg::kronos_R4: begin
+        keccak_tightly_pgk::keccak_R4: begin
           xif_issue_if.issue_ready = '1;
     
           xif_issue_if.issue_resp.accept = 1'b1;
@@ -117,15 +117,15 @@ module id_stage
           rs_values.rs2_0 = xif_issue_if.issue_req.rs[1];
           rs_values.rs3_0 = xif_issue_if.issue_req.rs[2];
     
-          rd_o <= instruction.as_kronos_R4.rd;
+          rd_o <= instruction.as_keccak_R4.rd;
           id_o <= xif_issue_if.issue_req.id;
     
-          if (instruction.as_kronos_R4.funct3 == FUNCT3_1) begin
-            if (instruction.as_kronos_R4.funct2 == OP_R4_R0) begin
+          if (instruction.as_keccak_R4.funct3 == FUNCT3_1) begin
+            if (instruction.as_keccak_R4.funct2 == OP_R4_R0) begin
               select_insn = rol32_1;
-            end else if (instruction.as_kronos_R4.funct2 == OP_R4_R1) begin
+            end else if (instruction.as_keccak_R4.funct2 == OP_R4_R1) begin
               select_insn = rol32_2;
-            end else if (instruction.as_kronos_R4.funct2 == OP_R4_R2) begin
+            end else if (instruction.as_keccak_R4.funct2 == OP_R4_R2) begin
               select_insn = bcop32;
             end else begin
               select_insn = nada;
@@ -174,11 +174,11 @@ module id_stage
         end else if (select_op== 2'b10) begin
           done       <= '1;
 
-          if (select_insn == kronos_pkg::rol32_1) begin
+          if (select_insn == keccak_tightly_pgk::rol32_1) begin
             continued     <= '1;
             result_reg_en <= '1;
           end 
-          else if (select_insn == kronos_pkg::rol32_2) begin
+          else if (select_insn == keccak_tightly_pgk::rol32_2) begin
             continued     <= '0;
             result_reg_en <= '0;
           end else begin

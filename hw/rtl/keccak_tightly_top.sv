@@ -2,13 +2,13 @@
 // Engineer:      Alessandra Dolmeta - alessandra.dolmeta@polito.it                     //
 //                                                                                      //                            
 // Design Name:    Top level module                                                     //
-// File name:      kronos_top.sv                                                         //
+// File name:      keccak_top.sv                                                         //
 // Language:       SystemVerilog                                                        //
 //////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-module kronos_top 
+module keccak_top 
   import cv32e40px_pkg::*;
   import cv32e40px_core_v_xif_pkg::*;
 (
@@ -24,10 +24,10 @@ module kronos_top
 );
 
 
-kronos_pkg::in_t rs_values;
-kronos_pkg::out_t rd_values;
+keccak_tightly_pgk::in_t rs_values;
+keccak_tightly_pgk::out_t rd_values;
 //result_to_commit;
-kronos_pkg::kronos_insn select_insn;
+keccak_tightly_pgk::keccak_insn select_insn;
 logic [4:0] rd_idex, rd_excom;
 logic [3:0] id_idex, id_excom;
 logic [1:0] select_op;
@@ -66,7 +66,7 @@ id_stage id_stage_i (
   .select_op_o(select_op)
 );
 
-kronos i_kronos (
+keccak i_keccak (
     .clk_i (clk_i),
     .rst_ni(rst_ni),
     

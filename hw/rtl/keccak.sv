@@ -2,26 +2,26 @@
 //
 // Auth: Valeria Piscopo - Politecnico di Torino
 // Date: October 2024
-// Desc: Generate the kronos system depending on which algorithms are going to be
+// Desc: Generate the keccak system depending on which algorithms are going to be
 //       run
 //
 /////////////////////////////////////////////////////////////////////////////////
 
-module kronos
+module keccak
   import cv32e40px_core_v_xif_pkg::*;
-  import kronos_pkg::*;
+  import keccak_tightly_pgk::*;
 (
     input logic clk_i,
     input logic rst_ni,
 
-    input kronos_pkg::in_t rs_values_i,
-    input kronos_pkg::kronos_insn insn_i,
+    input keccak_tightly_pgk::in_t rs_values_i,
+    input keccak_tightly_pgk::keccak_insn insn_i,
     input logic result_reg_en_i,
-    output kronos_pkg::out_t rd_values_o
+    output keccak_tightly_pgk::out_t rd_values_o
 );
 
   //--------always-present signals declarations ----------------------------------------------------------------------------
-  kronos_pkg::out_t out;
+  keccak_tightly_pgk::out_t out;
   logic [31:0] a1, b1, c1;
 
 
@@ -60,15 +60,15 @@ module kronos
 
     // Case statement to evaluate selector
     case (insn_i)
-        kronos_pkg::nada: begin
+        keccak_tightly_pgk::nada: begin
           out.rd1 = '0;
           out.rd2 = '0;
         end
-        kronos_pkg::rol32_1: begin
+        keccak_tightly_pgk::rol32_1: begin
           out.rd2 = '0;
           out.rd1 = rol32_1_result;
         end
-        kronos_pkg::rol32_2: begin
+        keccak_tightly_pgk::rol32_2: begin
           out.rd2 = '0;
           out.rd1 = result_reg;
         end
