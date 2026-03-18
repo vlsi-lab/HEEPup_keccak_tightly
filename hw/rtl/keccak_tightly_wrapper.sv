@@ -23,7 +23,7 @@ module keccak_tightly_wrapper
 );
 
 
-    keccak_top keccak_top_i(
+    keccak_tightly_top keccak_tightly_top_i(
     .clk_i (clk_i),
     .rst_ni(rst_ni),
 

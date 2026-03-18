@@ -65,7 +65,7 @@ id_stage id_stage_i (
   .select_op_o(select_op)
 );
 
-keccak i_keccak (
+keccak_tightly i_keccak_tightly (
     .clk_i (clk_i),
     .rst_ni(rst_ni),
     
